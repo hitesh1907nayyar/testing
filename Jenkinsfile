@@ -41,7 +41,7 @@ podTemplate(
 					credentialsId: '123456',
 					usernameVariable: 'DOCKER_HUB_USER',
 					passwordVariable: 'DOCKER_HUB_PASSWORD']]){
-				sh "executor -f `pwd`/Dockerfile -c `pwd` -d ${env.DOCKER_HUB_USER}/kaniko:${env.BUILD_NUMBER} --skip-tls-verify --insecure
+				sh "executor -f `pwd`/Dockerfile -c `pwd` -d ${env.DOCKER_HUB_USER}/kaniko:${env.BUILD_NUMBER} --skip-tls-verify --insecure"
 				}
             }
         }
