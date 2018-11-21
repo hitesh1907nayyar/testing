@@ -41,7 +41,7 @@ podTemplate(
 					credentialsId: '123456',
 					usernameVariable: 'DOCKER_HUB_USER',
 					passwordVariable: 'DOCKER_HUB_PASSWORD']]){
-				sh "executor -f `pwd`/Dockerfile -c `pwd` --insecure-skip-tls-verify --cache=true --destination=mydockerregistry:5000/myorg/myimage"
+				sh "executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=mydockerregistry:5000/myorg/myimage"
 				}
             }
         }
