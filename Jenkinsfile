@@ -37,9 +37,12 @@ podTemplate(
         def repository
         stage ('Docker') {
             container ('kaniko') {
-                def registryIp = sh(script: 'getent hosts registry.kube-system | awk \'{ print $1 ; exit }\'', returnStdout: true).trim()
-                repository = "${registryIp}:80/hello"
-                sh "executor -f `pwd`/Dockerfile -c `pwd` -d ${repository}:${commitId} --skip-tls-verify --insecure"
+				withCredentials([[$class: 'UsernamePasswordMultiBinding',
+					credentialsId: '123456',
+					usernameVariable: 'DOCKER_HUB_USER',
+					passwordVariable: 'DOCKER_HUB_PASSWORD']]){
+				sh "executor -f `pwd`/Dockerfile -c `pwd` -d ${env.DOCKER_HUB_USER}/kaniko:${env.BUILD_NUMBER} --skip-tls-verify --insecure
+				}
             }
         }
         stage ('Deploy') {
